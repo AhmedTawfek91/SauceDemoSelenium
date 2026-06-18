@@ -1,7 +1,8 @@
 package Runners;
 
-import Tests.TestBase;
+import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
+import org.testng.annotations.DataProvider;
 
 @CucumberOptions(glue = "StepDefinitions",
 features = "src/main/resources/Features",
@@ -10,5 +11,11 @@ plugin =  {
         "html:target/cucumber-reports/report.html",
         "json:target/cucumber-reports/cucumber.json"
         })
-public class TestRunner extends TestBase {
+public class TestRunner extends AbstractTestNGCucumberTests {
+
+    @Override
+    @DataProvider(parallel = false)
+    public Object[][] scenarios() {
+        return super.scenarios();
+    }
 }
