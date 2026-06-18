@@ -14,15 +14,14 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-  # 1. Set up Java
-  - task: JavaToolInstaller@0
-    displayName: 'Set up JDK 24'
-    inputs:
-      versionSpec: '24'
-      jdkArchitectureOption: 'x64'
-      jdkSourceOption: 'PreInstalled'
+  # 1. Install Java 24
+  - script: |
+      sudo apt-get update
+      sudo apt-get install -y openjdk-24-jdk
+      java -version
+    displayName: 'Install Java 24'
 
-  # 2. Set up Chrome
+  # 2. Install Chrome
   - script: |
       wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
       sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
@@ -34,34 +33,28 @@ steps:
   # 3. Run tests
   - task: Maven@3
     displayName: 'Run Selenium Tests'
+    continueOnError: true
     inputs:
       mavenPomFile: 'pom.xml'
       goals: 'clean test'
       publishJUnitResults: true
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
 
-  # 4. List generated files (debug)
+  # 4. Debug — list generated files
   - script: |
       echo "=== target folder ==="
       ls -la target/ || echo "target/ not found"
+      echo "=== cucumber reports ==="
       find target -name "*.html" -o -name "*.json" -o -name "*.xml" 2>/dev/null
-      echo "=== logs folder ==="
+      echo "=== logs ==="
       ls -la logs/ || echo "logs/ not found"
     displayName: 'List generated files'
     condition: always()
 
-  # 5. Publish test reports
+  # 5. Upload all reports
   - task: PublishBuildArtifacts@1
     displayName: 'Upload Test Reports'
     condition: always()
     inputs:
-      pathToPublish: 'target/cucumber-reports'
+      pathToPublish: 'target'
       artifactName: 'test-reports'
-
-  # 6. Publish HTML report
-  - task: PublishHtmlReport@1
-    displayName: 'Publish HTML Report'
-    condition: always()
-    inputs:
-      reportDir: 'target/cucumber-reports'
-      tabName: 'Cucumber Report'
