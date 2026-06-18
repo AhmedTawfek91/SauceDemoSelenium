@@ -20,6 +20,15 @@ public class TestBase extends AbstractTestNGCucumberTests {
     @BeforeTest
     public void openBrowser() {
         ChromeOptions options = new ChromeOptions();
+        boolean isCI = System.getenv("CI") != null;
+        if (isCI) {
+            options.addArguments("--headless");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("--disable-gpu");
+            options.addArguments("--window-size=1920,1080");
+            options.addArguments("--remote-debugging-port=9222");
+        }
         // Disable password manager & breach alerts
         Map<String, Object> prefs = new HashMap<>();
         prefs.put("password_manager_enabled", false);
