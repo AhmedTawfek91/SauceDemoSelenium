@@ -1,6 +1,6 @@
 package Runners;
 
-import io.cucumber.testng.AbstractTestNGCucumberTests;
+import Tests.TestBase;
 import io.cucumber.testng.CucumberOptions;
 import org.testng.annotations.DataProvider;
 
@@ -11,7 +11,7 @@ plugin =  {
         "html:target/cucumber-reports/report.html",
         "json:target/cucumber-reports/cucumber.json"
         })
-public class TestRunner extends AbstractTestNGCucumberTests {
+public class TestRunner extends TestBase {
 
     @Override
     @DataProvider(parallel = false)
