@@ -14,12 +14,13 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-  # 1. Install Java 24
-  - script: |
-      sudo apt-get update
-      sudo apt-get install -y openjdk-24-jdk
-      java -version
-    displayName: 'Install Java 24'
+  # 1. confirm Java version
+  - task: JavaToolInstaller@0
+    inputs:
+      versionSpec: '17'
+      jdkArchitectureOption: 'x64'
+      jdkSourceOption: 'PreInstalled'
+    displayName: 'Use Java 17'
 
   # 2. Install Chrome
   - script: |
@@ -31,7 +32,7 @@ steps:
     displayName: 'Install Chrome'
 
   # 3. Run tests
-  - task: Maven@3
+  - task: Maven@4
     displayName: 'Run Selenium Tests'
     continueOnError: true
     inputs:
