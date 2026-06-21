@@ -43,4 +43,12 @@ public class HomeTest extends TestBase {
         softAssert.assertTrue(Objects.requireNonNull(driver.getCurrentUrl()).contains("cart"));
     }
 
+    @When("User click on the logout button")
+    public void Click_Logout_POSITIVE()
+    {
+        homePage = new HomePage(driver);
+        homePage.clickSideMenuBtn();
+        homePage.clickLogoutBtn();
+    }
+
 }

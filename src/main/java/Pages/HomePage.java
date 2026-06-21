@@ -13,6 +13,8 @@ public class HomePage extends PageBase{
     By sauceLabsBikeLightProduct = By.id("add-to-cart-sauce-labs-bike-light");
     By cartNoOfAddedProducts = By.className("shopping_cart_badge");
     By cartBtn = By.className("shopping_cart_link");
+    By sideMenuBtn = By.id("react-burger-menu-btn");
+    By logoutBtn = By.linkText("Logout");
 
     public String getHomeScreenLogo()
     {
@@ -43,4 +45,18 @@ public class HomePage extends PageBase{
         waitForVisibility(cartBtn);
         driver.findElement(cartBtn).click();
     }
+
+    public void clickSideMenuBtn()
+    {
+        waitForVisibility(sideMenuBtn);
+        driver.findElement(sideMenuBtn).click();
+    }
+
+    public void clickLogoutBtn()
+    {
+        waitForVisibility(logoutBtn);
+        driver.findElement(logoutBtn).click();
+    }
+
+
 }
