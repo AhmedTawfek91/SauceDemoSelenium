@@ -2,6 +2,9 @@ package Pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import static Utils.Generators.*;
+
+
 
 public class CheckoutCompletePage extends PageBase{
     public CheckoutCompletePage(WebDriver driver) {
@@ -28,5 +31,10 @@ public class CheckoutCompletePage extends PageBase{
     {
         waitForVisibility(backHomeBtn);
         driver.findElement(backHomeBtn).click();
+    }
+
+    public void captureScreenShot()
+    {
+        takeScreenShot("PrintScreenFile", DATE_TIME_GENERATOR);
     }
 }

@@ -4,10 +4,9 @@ import Pages.HomePage;
 import Tests.TestBase;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import static Utils.Utils.*;
 
 import java.util.Objects;
-
-import static Utils.Utils.*;
 
 public class HomeTest extends TestBase {
 

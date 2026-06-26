@@ -8,9 +8,7 @@ import org.testng.annotations.BeforeTest;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import static Utils.Environments.*;
-
 
 
 public class TestBase extends AbstractTestNGCucumberTests {

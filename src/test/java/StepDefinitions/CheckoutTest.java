@@ -4,11 +4,9 @@ import Pages.CheckoutPage;
 import Tests.TestBase;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-
-import java.util.Objects;
-
-import static Utils.Utils.*;
 import static Utils.Generators.*;
+import static Utils.Utils.*;
+import java.util.Objects;
 
 public class CheckoutTest extends TestBase {
 

@@ -4,10 +4,9 @@ import Pages.CheckoutCompletePage;
 import Tests.TestBase;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import static Utils.Utils.*;
 
 import java.util.Objects;
-
-import static Utils.Utils.*;
 
 public class CheckoutCompleteTest extends TestBase {
 
@@ -16,6 +15,7 @@ public class CheckoutCompleteTest extends TestBase {
     @When("User click on back home button")
     public void Click_BackHome_Btn_POSITIVE() {
         checkoutCompletePage = new CheckoutCompletePage(driver);
+        checkoutCompletePage.captureScreenShot();
         String checkoutCompleteHeader = checkoutCompletePage.getCompleteMessageHeader();
         System.out.println(checkoutCompleteHeader);
         String checkoutCompleteText = checkoutCompletePage.getCompleteMessageText();
